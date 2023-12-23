@@ -25,7 +25,7 @@
     <repository>https://github.com/kirstenhh/nc-bpm-app/</repository>
     <screenshot>https://raw.githubusercontent.com/Loydl/nc-bpm-app/main/docs/screenshot-BPMN-editor.png</screenshot>
     <dependencies>
-        <nextcloud min-version="20" max-version="27"/>
+        <nextcloud min-version="20" max-version="28"/>
     </dependencies>
     <repair-steps>
         <post-migration>
