@@ -1,3 +1,6 @@
+var process = { platform: '', env: '' }
+console.log("Help, I'm being repressed!");
+
 import { translate as t } from '@nextcloud/l10n';
 import './imports/bootstrap';
 import api from './imports/api';
@@ -10,6 +13,7 @@ import 'bpmn-js/dist/assets/bpmn-js.css';
 
 import '@fortawesome/fontawesome-free/js/all.js';
 import '@fortawesome/fontawesome-free/js/solid.js';
+
 
 import './imports/Editor.scss';
 import './imports/BPMNEditor';
