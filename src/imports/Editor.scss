@@ -183,7 +183,7 @@
   }
 
   overflow-y: scroll;
-  border-left: solid 2px #555;
+  border-left: solid 2px var(--header-bottom-border-color);
   max-width: 25%;
   width: 25%;
 }
@@ -304,6 +304,11 @@ div[contenteditable="true"]{
   stroke: rgba(66, 180, 21, 0.7) !important; /* color elements as red */
 }
 
+.djs-direct-editing-content:focus{
+ border-color: 2px solid var(--color-border-max-contrast);
+
+
+}
 #save-button {
   position: fixed;
   bottom: 20px;
