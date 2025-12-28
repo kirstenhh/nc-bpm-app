@@ -114,3 +114,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 1.7.1 (2025-03-10)
 - Minor CSS fix (on files page, sidebar content was hidden)
+
+## 1.7.3 (2025-12-28)
+- Nextcloud support updated to v33
+- Fixed read-only BPMN viewer to be navigable, removed non-functional Properties button

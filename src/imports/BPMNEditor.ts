@@ -1,5 +1,5 @@
 import BPMNModeler from 'bpmn-js/lib/Modeler';
-import Viewer from 'bpmn-js/lib/Viewer';
+import NavigatedViewer from 'bpmn-js/lib/NavigatedViewer';
 import {
 	BpmnPropertiesPanelModule,
 	BpmnPropertiesProviderModule,
@@ -61,7 +61,7 @@ const PLAIN_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
 
 export default class BPMNEditor extends Editor {
 
-	private modeler: Modeler | Viewer;
+	private modeler: Modeler | NavigatedViewer;
 
 	protected getContent(): Promise<string> {
 		if (this.modeler) {
@@ -255,7 +255,7 @@ export default class BPMNEditor extends Editor {
 					camunda: camundaModdleDescriptor,
 					nc: propDescriptor,
 				},
-			}) : new Viewer({
+			}) : new NavigatedViewer({
 				container: canvasElement
 			});
 			this.modeler.on('element.changed', (e) => {
@@ -402,7 +402,7 @@ export default class BPMNEditor extends Editor {
 		const containerElement = super.getAppContainerElement();
 		// if (newcontainer) {
 		//const groupElement = $('#modeler-actions-group');
-		if (newcontainer) {
+		if (newcontainer && this.isFileUpdatable()) {
 			const actionsgroup = document.getElementById('modeler-actions-group') ?? $('#modeler-actions-group');
 			$('<div>', { id: 'propertiesToggle' })
 				.attr('role', 'button')
@@ -412,15 +412,6 @@ export default class BPMNEditor extends Editor {
 				.appendTo(actionsgroup);
 		}
 
-
-		// 	//Properties Panel on/off button
-		// 	const propertiesToggle = $('<div>', { id: 'propertiesToggle' })
-		// 		.attr('role', 'button')
-		// 		.addClass('entry')
-		// 		.on('click', this.toggleProperties)
-		// 		.append('<span>Properties</span>')
-		// 		.appendTo(groupElement);
-		// }
 		return containerElement;
 	}
 
