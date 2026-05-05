@@ -139,9 +139,6 @@ if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 		addNewFileMenuEntry({
 			id: ext,
 			displayName: attr.newStr,
-			enabled() {
-				return getNavigation()?.active?.id === 'files';
-			},
 			iconSvgInline: attr.icon,
 			async handler(folder) {
 				//Generate new BPMN/DMN diagram
@@ -158,8 +155,6 @@ if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 						console.log(e);
 						return false;
 					}
-
-
 				}
 			},
 		});
@@ -201,58 +196,58 @@ else {  // Nextcloud versions lower than 28
 			menu.addMenuEntry({
 				id: 'bpmn',
 				displayName: t('files_bpm', 'New BPMN diagram'),
-				templateName: 'diagram.bpmn',
-				iconClass: 'icon-filetype-bpmn',
-				fileType: 'file',
-				actionHandler(fileName: string) {
+							  templateName: 'diagram.bpmn',
+							  iconClass: 'icon-filetype-bpmn',
+							  fileType: 'file',
+							  actionHandler(fileName: string) {
 
-					const fileList = menu.fileList;
-					const file = {
-						name: fileName,
-						path: fileList.getCurrentDirectory(),
-						permissions: OC.PERMISSION_CREATE | OC.PERMISSION_UPDATE,
-					};
+								  const fileList = menu.fileList;
+								  const file = {
+									  name: fileName,
+									  path: fileList.getCurrentDirectory(),
+							  permissions: OC.PERMISSION_CREATE | OC.PERMISSION_UPDATE,
+								  };
 
-					startBPMNEditor(file, fileList);
-				},
+								  startBPMNEditor(file, fileList);
+							  },
 			});
 
 			menu.addMenuEntry({
 				id: 'dmn',
 				displayName: t('files_bpm', 'New DMN diagram'),
-				templateName: 'diagram.dmn',
-				iconClass: 'icon-filetype-dmn',
-				fileType: 'file',
-				actionHandler(fileName: string) {
-					const fileList = menu.fileList;
+							  templateName: 'diagram.dmn',
+							  iconClass: 'icon-filetype-dmn',
+							  fileType: 'file',
+							  actionHandler(fileName: string) {
+								  const fileList = menu.fileList;
 
-					const file = {
-						name: fileName,
-						path: fileList.getCurrentDirectory(),
-						permissions: OC.PERMISSION_CREATE | OC.PERMISSION_UPDATE,
-					};
+								  const file = {
+									  name: fileName,
+									  path: fileList.getCurrentDirectory(),
+							  permissions: OC.PERMISSION_CREATE | OC.PERMISSION_UPDATE,
+								  };
 
-					startDMNEditor(file, fileList);
-				},
+								  startDMNEditor(file, fileList);
+							  },
 			});
 
 			menu.addMenuEntry({
 				id: 'cmmn',
 				displayName: t('files_bpm', 'New CMMN diagram'),
-				templateName: 'diagram.cmmn',
-				iconClass: 'icon-filetype-cmmn',
-				fileType: 'file',
-				actionHandler(fileName: string) {
-					const fileList = menu.fileList;
+							  templateName: 'diagram.cmmn',
+							  iconClass: 'icon-filetype-cmmn',
+							  fileType: 'file',
+							  actionHandler(fileName: string) {
+								  const fileList = menu.fileList;
 
-					const file = {
-						name: fileName,
-						path: fileList.getCurrentDirectory(),
-						permissions: OC.PERMISSION_CREATE | OC.PERMISSION_UPDATE,
-					};
+								  const file = {
+									  name: fileName,
+									  path: fileList.getCurrentDirectory(),
+							  permissions: OC.PERMISSION_CREATE | OC.PERMISSION_UPDATE,
+								  };
 
-					startCMMNEditor(file, fileList);
-				},
+								  startCMMNEditor(file, fileList);
+							  },
 			});
 		},
 	};
@@ -274,14 +269,14 @@ else {  // Nextcloud versions lower than 28
 			fileList.fileActions.registerAction({
 				name: 'bpmn',
 				displayName: t('files_bpm', 'BPMN diagram'),
-				mime: 'application/x-bpmn',
-				icon: OC.imagePath('files_bpm', 'icon-filetypes_bpmn.svg'),
-				permissions: OC.PERMISSION_READ,
-				actionHandler(fileName: string, context) {
-					const file = context.fileList.elementToFile(context.$file);
+												mime: 'application/x-bpmn',
+												icon: OC.imagePath('files_bpm', 'icon-filetypes_bpmn.svg'),
+												permissions: OC.PERMISSION_READ,
+												actionHandler(fileName: string, context) {
+													const file = context.fileList.elementToFile(context.$file);
 
-					startBPMNEditor(file, context.fileList);
-				},
+													startBPMNEditor(file, context.fileList);
+												},
 			});
 
 			fileList.fileActions.setDefault('application/x-bpmn', 'bpmn');
@@ -289,14 +284,14 @@ else {  // Nextcloud versions lower than 28
 			fileList.fileActions.registerAction({
 				name: 'dmn',
 				displayName: t('files_bpm', 'DMN diagram'),
-				mime: 'application/x-dmn',
-				icon: OC.imagePath('files_bpm', 'icon-filetypes_dmn.svg'),
-				permissions: OC.PERMISSION_READ,
-				actionHandler(fileName: string, context) {
-					const file = context.fileList.elementToFile(context.$file);
+												mime: 'application/x-dmn',
+												icon: OC.imagePath('files_bpm', 'icon-filetypes_dmn.svg'),
+												permissions: OC.PERMISSION_READ,
+												actionHandler(fileName: string, context) {
+													const file = context.fileList.elementToFile(context.$file);
 
-					startDMNEditor(file, context.fileList);
-				},
+													startDMNEditor(file, context.fileList);
+												},
 			});
 
 			fileList.fileActions.setDefault('application/x-dmn', 'dmn');
@@ -305,14 +300,14 @@ else {  // Nextcloud versions lower than 28
 			fileList.fileActions.registerAction({
 				name: 'cmmn',
 				displayName: t('files_bpm', 'CMMN diagram'),
-				mime: 'application/x-cmmn',
-				icon: OC.imagePath('files_bpm', 'icon-filetypes_cmmn.svg'),
-				permissions: OC.PERMISSION_READ,
-				actionHandler(fileName: string, context) {
-					const file = context.fileList.elementToFile(context.$file);
+												mime: 'application/x-cmmn',
+												icon: OC.imagePath('files_bpm', 'icon-filetypes_cmmn.svg'),
+												permissions: OC.PERMISSION_READ,
+												actionHandler(fileName: string, context) {
+													const file = context.fileList.elementToFile(context.$file);
 
-					startDMNEditor(file, context.fileList);
-				},
+													startDMNEditor(file, context.fileList);
+												},
 			});
 
 			fileList.fileActions.setDefault('application/x-cmmn', 'cmmn');

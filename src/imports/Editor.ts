@@ -3,9 +3,9 @@ import api from './api';
 import './Editor.scss';
 import { jsPDF } from 'jspdf';
 import 'svg2pdf.js';
-import { DialogBuilder, showError } from '@nextcloud/dialogs'
+import { DialogBuilder, showError } from '@nextcloud/dialogs';
 import '@nextcloud/dialogs/style.css';
-
+import { generateUrl, imagePath } from '@nextcloud/router';
 export type NextcloudFile = {
 	id?: number
 	name: string
@@ -147,17 +147,20 @@ export default abstract class Editor {
 			const oldflag = getComputedStyle(document.body).getPropertyValue('--original-icon-download-dark') == '';
 
 			if (this.isFileUpdatable()) {
-				$('<div>')
-					.addClass('entry icon-save bpmn-save')
-					.attr('role', 'button')
-					.on('click', this.clickCallbackFactory(this.onSave, 'icon-save'))
-					.appendTo(groupElement);
+				const button = $('<div>')
+				.addClass('entry icon-save bpmn-save')
+				.attr('role', 'button')
+				.on('click', this.clickCallbackFactory(this.onSave, 'icon-save'))
+				.appendTo(groupElement);
+
+				const img = $('<img>').attr('src', imagePath('files_bpm', 'floppy-disk.svg'));
+				button.append(img);
 			}
 
 			const downloadElement = $('<div>')
-				.attr('role', 'button')
-				.on('click', this.toggleMenu)
-				.appendTo(groupElement);
+			.attr('role', 'button')
+			.on('click', this.toggleMenu)
+			.appendTo(groupElement);
 
 			if (oldflag) {
 				downloadElement.addClass('entry icon-download-old');
@@ -165,19 +168,22 @@ export default abstract class Editor {
 				downloadElement.addClass('entry icon-download');
 			}
 
+			const svgIcon = $('<img>').attr('src', imagePath('files_bpm', 'image.svg'));
+			const pdfIcon = $('<img>').attr('src', imagePath('files_bpm', 'application-pdf.svg'));
 			$('<ul>')
-				.addClass('menu hide')
-				.append($('<li>').addClass('entry icon-image').attr('title', t('files_bpm', 'Export SVG')).on('click', this.clickCallbackFactory(this.onDownloadAsSVG, 'icon-download')))
-				.append($('<li>').addClass('entry icon-pdf').attr('title', t('files_bpm', 'Export PDF')).on('click', this.clickCallbackFactory(this.onDownloadAsPDF, 'icon-download')))
-				.appendTo(downloadElement);
+			.addClass('menu hide')
+			.append($('<li>').addClass('entry icon-image').attr('title', t('files_bpm', 'Export SVG')).on('click', this.clickCallbackFactory(this.onDownloadAsSVG, 'icon-download')).append(svgIcon))
+			.append($('<li>').addClass('entry icon-pdf').attr('title', t('files_bpm', 'Export PDF')).on('click', this.clickCallbackFactory(this.onDownloadAsPDF, 'icon-download')).append(pdfIcon))
+			.appendTo(downloadElement);
 
 			if (this.isRealFileList()) {
 				const closeBtn = $('<div>')
-					.attr('role', 'button')
-					.on('click', this.clickCallbackFactory(this.onClose))
-					.appendTo(groupElement);
+				.attr('role', 'button')
+				.on('click', this.clickCallbackFactory(this.onClose))
+				.appendTo(groupElement);
 				if (oldflag) {
 					closeBtn.addClass('entry icon-close-old bpmn-close');
+
 				} else {
 					closeBtn.addClass('entry icon-close bpmn-close');
 				}
@@ -216,7 +222,7 @@ export default abstract class Editor {
 			$('body').off('click', closeMenu);
 		}
 
-// || ev.currentTarget !== ev.target
+		// || ev.currentTarget !== ev.target
 		if ($(ev.currentTarget).hasClass('icon-loading')) {
 			closeMenu();
 			return;
@@ -333,7 +339,7 @@ export default abstract class Editor {
 		const pdf = new jsPDF({
 			orientation: 'landscape',
 			format: 'a4',
-			unit: 'px',
+				unit: 'px',
 		});//bounding.width > bounding.height ? 'l' : 'p', 'pt', [bounding.width, bounding.height]);
 		const title = this.file.name.replace(/\.[^.]+$/, '') ?? 'Diagram';
 
@@ -403,7 +409,7 @@ export default abstract class Editor {
 		return new Promise(resolve => {
 
 			let newButtons = [{ label: 'Close editor', type: 'primary' as const, callback: () => { resolve(true); } },
-			{ label: 'Abort', callback: () => { resolve(false); } }
+						   { label: 'Abort', callback: () => { resolve(false); } }
 			];
 			const builder = new DialogBuilder();
 			builder.setName('Discard changes?')
