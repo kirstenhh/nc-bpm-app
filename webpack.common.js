@@ -2,14 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const fileLoader = {
-	loader: 'file-loader',
-	options: {
-		name: '[path][name]-[sha1:hash:hex:8].[ext]',
-		outputPath: '../assets/',
-	},
-};
-const { VueLoaderPlugin } = require('vue-loader')
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
 	entry: {
@@ -62,6 +55,10 @@ module.exports = {
 			{
 				test: /\.(svg|png|jpg|gif)(\?.+)?$/,
 				type: 'asset/resource',
+			},
+			{
+				test: /.*img\/.+\.svg$/,
+				type: 'asset/source',
 			},
 			{
 				test: /.*\.(ttf|woff|woff2|eot)(\?.+)?$/,

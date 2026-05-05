@@ -6,7 +6,7 @@
       "es6"
     ],
     "module": "es2020",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "target": "ES6",
     "strictNullChecks": true,
     "sourceMap": true,

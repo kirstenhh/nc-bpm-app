@@ -4,7 +4,7 @@ console.log("Help, I'm being repressed!");
 import { translate as t } from '@nextcloud/l10n';
 import './imports/bootstrap';
 import api from './imports/api';
-import { DialogBuilder, showError } from '@nextcloud/dialogs'
+import { showError } from '@nextcloud/dialogs';
 import '@nextcloud/dialogs/style.css';
 
 import 'bpmn-js/dist/assets/diagram-js.css';
@@ -21,22 +21,14 @@ import './imports/DMNEditor';
 import './imports/CMMNEditor';
 import './imports/Editor';
 
-import {
-	DefaultType, FileAction, addNewFileMenuEntry, registerFileAction,
-	File, Permission, getNavigation
-} from '@nextcloud/files'
-
-import './imports/Editor.scss';
+import type { IFileAction } from '@nextcloud/files';
+import { addNewFileMenuEntry, DefaultType, getNavigation, registerFileAction } from '@nextcloud/files';
 import './filelist.scss';
 
-const bpmnicon = require('svg-inline-loader!../img/icon-filetypes_bpmn.svg')
-const dmnicon = require('svg-inline-loader!../img/icon-filetypes_dmn.svg')
-const cmmnicon = require('svg-inline-loader!../img/icon-filetypes_cmmn.svg')
+const bpmnicon = require('../img/icon-filetypes_bpmn.svg');
+const dmnicon = require('../img/icon-filetypes_dmn.svg');
+const cmmnicon = require('../img/icon-filetypes_cmmn.svg');
 
-const STATUS_CREATED = 201;
-
-
-//
 function bootstrapFileShare() {
 	//called once on page load
 	if (!OCA?.Sharing?.PublicApp) {
@@ -45,14 +37,18 @@ function bootstrapFileShare() {
 }
 
 function fixFileIconForFileShare() {
-	if (!$('#dir').val() && $('#mimetype').val() === 'application/x-bpmn') {
+	const dir = $('#dir').val();
+	const mime = $('#mimetype').val();
+
+	if (!dir && mime === 'application/x-bpmn') {
 		$('#mimetypeIcon').val(bpmnicon); //OC.imagePath('files_bpm', 'icon-filetypes_bpmn.svg'));
 	}
 
-	if (!$('#dir').val() && $('#mimetype').val() === 'application/x-dmn') {
+	if (!dir && mime === 'application/x-dmn') {
 		$('#mimetypeIcon').val(dmnicon);//OC.imagePath('files_bpm', 'icon-filetypes_dmn.svg'));
 	}
-	if (!$('#dir').val() && $('#mimetype').val() === 'application/x-cmmn') {
+
+	if (!dir && mime === 'application/x-cmmn') {
 		$('#mimetypeIcon').val(cmmnicon);//OC.imagePath('files_bpm', 'icon-filetypes_dmn.svg'));
 	}
 }
@@ -68,8 +64,8 @@ function registerFileIcon() {
 //action when "New BPMN File" or "New DMN File"
 async function createDiagram(folder, ext) {
 	//const content = await this.getContent();
-	let path = folder.path;
-	let filename = 'New-' + ext.toUpperCase() + '-file-' + (new Date()).getTime().toString() + '.' + ext;
+	const path = folder.path;
+	const filename = 'New-' + ext.toUpperCase() + '-file-' + (new Date()).getTime().toString() + '.' + ext;
 	try {
 		const result = await api.uploadFile(path, filename, '');
 
@@ -113,27 +109,30 @@ if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 	registerFileIcon();
 
 	function registerAction(ext, attr) {
-		registerFileAction(new FileAction({
+		const action: IFileAction = {
 			id: ext,
 			displayName() {
-				return 'Open in ' + ext.toUpperCase() + ' Editor'
+				return 'Open in ' + ext.toUpperCase() + ' Editor';
 			},
-			enabled(nodes) {
-				return nodes.length === 1 && attr.mime === nodes[0].mime && (nodes[0].permissions & OC.PERMISSION_READ) !== 0
+			enabled({ nodes }) {
+				return nodes.length === 1 && attr.mime === nodes[0].mime && (nodes[0].permissions & OC.PERMISSION_READ) !== 0;
 			},
 			iconSvgInline: () => attr.icon,
-			async exec(file, view) {
+			async exec(context) {
+				const file = context.nodes[0] || undefined;
+				if (!file) {
+					return false;
+				}
 
-				var dirName = file.dirname;
+				const dirName = file.dirname;
 
-				var url = OC.generateUrl('/apps/' + 'files_bpm/?' + 'dir=' + dirName + '&fileId=' + file.fileid);
-				window.location.href = url;
+				window.location.href = OC.generateUrl('/apps/' + 'files_bpm/?' + 'dir=' + dirName + '&fileId=' + file.fileid);
 				return true;
-
-
 			},
-			default: DefaultType.HIDDEN
-		}));
+			default: DefaultType.HIDDEN,
+		};
+
+		registerFileAction(action);
 	}
 
 	function addMenuEntry(ext, attr) {
@@ -141,11 +140,10 @@ if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 			id: ext,
 			displayName: attr.newStr,
 			enabled() {
-				return getNavigation()?.active?.id === 'files'
+				return getNavigation()?.active?.id === 'files';
 			},
-			iconClass: attr.css,
-			//iconSvgInline: attr.icon,
-			async handler(folder, contents) {
+			iconSvgInline: attr.icon,
+			async handler(folder) {
 				//Generate new BPMN/DMN diagram
 				if (!window.OC.getCurrentUser().uid) {
 					alert("Not yet implemented.");
@@ -163,7 +161,7 @@ if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 
 
 				}
-			}
+			},
 		});
 	}
 
