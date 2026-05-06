@@ -140,9 +140,6 @@ if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 		addNewFileMenuEntry({
 			id: ext,
 			displayName: attr.newStr,
-			enabled() {
-				return getNavigation()?.active?.id === 'files'
-			},
 			iconClass: attr.css,
 			//iconSvgInline: attr.icon,
 			async handler(folder, contents) {

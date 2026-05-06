@@ -118,3 +118,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 1.7.3 (2025-12-28)
 - Nextcloud support updated to v33
 - Fixed read-only BPMN viewer to be navigable, removed non-functional Properties button
+
+
+## 1.8.0(2026-05-05)
+- Nextcloud support updated to v33 (correctly this time: previous update was on the dev version of Nextcloud 33)
+- Issue #19 fixed (missing new file buttons in some views)
+- Fixed missing icons for save and for export file types
+
+## 1.8.1 (2026-05-06)
+- Fixing Error in version 1.8.0: lists support for older versions, but is incompatible
+- This version supports Nextcloud versions up to v32. A separate update will be made to rearrange for the other files
+- Implements the 1.8.0 fix for Issue #19.
+- Committed yarn and composer lock files to record functioning package versions (due to ongoing problems with package versioning)

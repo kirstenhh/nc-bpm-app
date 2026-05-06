@@ -1,6 +1,6 @@
 {
 	"name": "files_bpm",
-	"version": "1.7.3",
+	"version": "1.8.1",
 	"description": "BPMN editor for Nextcloud",
 	"main": "src/index.js",
 	"repository": "https://github.com/kirstenhh/nc-bpm-app",
@@ -50,8 +50,9 @@
 		"cmmn-js": "^0.20.0",
 		"cmmn-js-properties-panel": "^0.9.0",
 		"diagram-js": "15.2.0",
-		"dmn-js": "^16.3.2",
-		"dmn-js-properties-panel": "^3.2.1",
+		"dmn-js": "17.6.0",
+		"dmn-js-properties-panel": "3.11.0",
+		"html2canvas": "^1.4.1",
 		"jquery": "^3.5.1",
 		"jspdf": "^2.5.1",
 		"linkifyjs": "^4.1.3",
@@ -82,8 +83,8 @@
 		"@nextcloud/axios": "^2.4.0",
 		"@nextcloud/browserslist-config": "^3.0.0",
 		"@nextcloud/dialogs": "^7.1.0",
-		"@nextcloud/files": "^3.1.0",
-		"@nextcloud/initial-state": "^2.1.0",
+		"@nextcloud/files": "3.12.2",
+		"@nextcloud/initial-state": "2.1.0",
 		"@nextcloud/password-confirmation": "^6.0.1",
 		"@nextcloud/router": "^3.0.0",
 		"@nextcloud/vue": "^9.2.0",
@@ -119,11 +120,11 @@
 		"ts-loader": "^9.5.1",
 		"typescript": "5.3.3",
 		"url-loader": "^4.0.0",
+		"vite": "^7.0.0",
 		"webpack": "^5.75.0",
 		"webpack-cli": "^5.0.1",
 		"webpack-merge": "^5.8.0",
 		"webpack-node-externals": "^3.0.0",
-		"zeebe-bpmn-moddle": "^1.0.0",
-		"vite": "^7.0.0"
+		"zeebe-bpmn-moddle": "^1.0.0"
 	}
 }
