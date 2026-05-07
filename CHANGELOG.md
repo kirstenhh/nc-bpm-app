@@ -123,3 +123,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Nextcloud support updated to v33 (correctly this time: previous update was on the dev version of Nextcloud 33)
 - Issue #19 fixed (missing new file buttons in some views)
 - Fixed missing icons for save and for export file types
+
+## 1.8.1 (2026-05-06)
+- Note: Due to an oversight, version 1.8.0 listed its minimum Nextcloud version as 20, which is incorrect; it *only* supports v33.
+- Reverted to a supported version for Nextcloud up to v32.
+- Fixed issue #19 : New file options did not show on the "Personal Files" page.
+
+## 1.8.2 (2026-05-07)
+- App content is the same as version 1.8.0, in order to fix the versioning order.
+- Fixed numbers to correctly show that this version of the app only supports Nextcloud v33.
