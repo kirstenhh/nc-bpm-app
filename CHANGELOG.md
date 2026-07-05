@@ -132,3 +132,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 1.8.2 (2026-05-07)
 - App content is the same as version 1.8.0, in order to fix the versioning order.
 - Fixed numbers to correctly show that this version of the app only supports Nextcloud v33.
+
+## 1.8.3 (2026-06-05)
+- Nextcloud support updated to v34
