@@ -11,7 +11,6 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\IPreview;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'files_bpm';
@@ -26,17 +25,14 @@ class Application extends App implements IBootstrap {
 	public function register(IRegistrationContext $context): void {
 		$context->registerEventListener(LoadAdditionalScriptsEvent::class, LoadAdditionalScriptsListener::class);
 		$context->registerEventListener(BeforeTemplateRenderedEvent::class, LoadAdditionalScriptsListener::class);
+
+		// \OCP\IPreview::registerProvider() was removed in Nextcloud 35.
+		// Register the preview providers via the registration context instead
+		// (available since Nextcloud 23).
+		$context->registerPreviewProvider(BPMN::class, '/application\/x-bpmn/');
+		$context->registerPreviewProvider(DMN::class, '/application\/x-dmn/');
 	}
 
 	public function boot(IBootContext $context): void {
-		$context->injectFn(function (IPreview $previewManager, BPMN $bpmn, DMN $dmn) {
-			$previewManager->registerProvider('/application\/x-bpmn/', function () use ($bpmn) {
-				return $bpmn;
-			});
-
-			$previewManager->registerProvider('/application\/x-dmn/', function () use ($dmn) {
-				return $dmn;
-			});
-		});
 	}
 }
