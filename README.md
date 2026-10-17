@@ -24,14 +24,25 @@ The BPM Files app is maintained by [processCentric GmbH](https://www.processcent
 The easiest way to install this app is by using the [Nextcloud app store](https://apps.nextcloud.com/apps/files_bpm).
 If you would prefer to build it from source, the instructions are below.
 
-To install the app, change into your Nextcloud's apps directory:
+## :wrench: Building from source
+
+We recommend using the [nextcloud-docker-dev](https://nextcloud.github.io/nextcloud-docker-dev/) development environment.
+
+Before building, ensure you have installed: 
+ - A compatible version of Nodejs (check package.json)
+ - NPM
+ - [Yarn](https://yarnpkg.com) (Note: classic and modern versions should both work, but this app has mainly been developed with the classic version. )
+ - PHP 8.4 (with cURL and DOM extensions enabled)
+ - [Composer](https://getcomposer.org)
+
+To build BPM Files, change into your Nextcloud's apps directory, for example (if you are using the ):
 
     cd nextcloud/workspace/server/apps-extra
 
 Then run:
 
     git clone https://github.com/kirstenhh/nc-bpm-app.git files_bpm
-  Note: double-check that the folder is now named files_bpm, otherwise the app won't show up in your Nextcloud apps.
+  Note: double-check that the folder is now named files_bpm, otherwise the app won't show up in your Nextcloud apps list.
 
 Install the dependencies using:
 
@@ -45,6 +56,8 @@ When the build is finished, you should see "BPM Files" in your Nextcloud apps. (
 
 If you are trying to extend the tool for your own usage, you will find resources and information about the bpmn-js modeler tool [here](https://github.com/bpmn-io/bpmn-js)
 
+Note: the build process can be somewhat fragile. If you experience difficulties, please feel free to contact the developer for assistance. 
+
 ## :gear: Configuration
 
 To give your files their proper icons, you need to add the icon images to your Nextcloud server. You can find the images in the /img folder here. Copy them to [your Nextcloud]/servercore/img/filetypes/ to get the icons in your Files.
@@ -53,7 +66,7 @@ If you would like to have previews of your BPM files, please install the [BPM pr
 service][preview-service] on your server (requires root access) and add the
 corresponding URL to your settings under admin settings > additional settings.
 
-## :nerd_face: Release guide
+## :dizzy: Release guide
 This repo contains some Node scripts to simplify the release process on Linux
 systems. They require openssl and gpg installed on your system and assume that
 you have a valid [signing key] in `~/.nextcloud/certificates/files_bpm.key`.

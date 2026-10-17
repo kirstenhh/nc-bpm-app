@@ -245,16 +245,27 @@ button.bio-properties-panel-group-header-button.bio-properties-panel-arrow{
 
 .bio-properties-panel-group-header-button,
 .bio-properties-panel-input{
-  color: var(--color-grey-225-10-15) !important;
-  background-color: var(--input-background-color) !important;
   border: 2px solid var(--color-grey-225-10-85) !important;
-  color: var(--color-grey-225-10-35) !important;
   :hover{
     box-shadow: 0 0 0 2px var(--color-grey-225-10-75) !important;
   }
 }
 .bio-properties-panel-input:hover {
   box-shadow: 0 0 0 2px var(--color-grey-225-10-75) !important;
+}
+
+
+.bio-properties-panel-input[type="text"]{
+  background-color: var(--input-background-color) !important;
+  border-radius: 1px;
+  height:fit-content;
+}
+
+.bio-properties-panel-input[type="checkbox"]{
+  --checkbox-size: 20px;
+  min-height: var(--checkbox-size);
+  height: var(--checkbox-size);
+  width: var(--checkbox-size);
 }
 
 .bjs-breadcrumbs {
@@ -323,3 +334,4 @@ left: 20px;
   color: #808080;
 
 }
+

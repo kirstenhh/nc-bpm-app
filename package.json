@@ -84,7 +84,7 @@
     "@nextcloud/axios": "^2.4.0",
     "@nextcloud/browserslist-config": "^3.0.0",
     "@nextcloud/dialogs": "^7.1.0",
-    "@nextcloud/files": "^4.0.0",
+    "@nextcloud/files": "~4.0.0",
     "@nextcloud/initial-state": "^3.0.0",
     "@nextcloud/password-confirmation": "^6.0.1",
     "@nextcloud/router": "^3.0.0",

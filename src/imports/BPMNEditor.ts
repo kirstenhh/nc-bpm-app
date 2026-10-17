@@ -166,7 +166,7 @@ export default class BPMNEditor extends Editor {
 		canvas.setRootElement(rootelem);
 	}
 
-	//helper method for getting the extension element values?
+	//helper method for getting the extension element values
 	private extElemHelper = (xml: string) => {
 
 		const extensionDict = new Map<string, Array<[string, string]>>();

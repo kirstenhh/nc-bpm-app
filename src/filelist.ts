@@ -26,9 +26,10 @@ import { addNewFileMenuEntry, DefaultType, getNavigation, registerFileAction } f
 import './filelist.scss';
 
 const bpmnicon = require('../img/icon-filetypes_bpmn.svg');
-const dmnicon = require('../img/icon-filetypes_dmn.svg');
+const dmnicon = '<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" enable-background="new 0 0 306.185 120.296" viewBox="24 26 68 68" y="0px" x="0px" version="1.1"><g><circle r="1e5" fill="#F08705"/><line y2="72.394" x2="41.061" y1="43.384" x1="58.069" stroke-miterlimit="10" stroke-width="3.5528" stroke="#FFFFFF" fill="none" /><line y2="72.394" x2="75.076" y1="43.384" x1="58.068" stroke-miterlimit="10" stroke-width="3.5008" stroke="#FFFFFF" fill="none" /><g><path d="M52.773,77.084c0,1.954-1.599,3.553-3.553,3.553H36.999c-1.954,0-3.553-1.599-3.553-3.553v-9.379    c0-1.954,1.599-3.553,3.553-3.553h12.222c1.954,0,3.553,1.599,3.553,3.553V77.084z" fill="#FFFFFF" /></g><g id="g3419"><path d="M67.762,48.074c0,1.954-1.599,3.553-3.553,3.553H51.988c-1.954,0-3.553-1.599-3.553-3.553v-9.379    c0-1.954,1.599-3.553,3.553-3.553H64.21c1.954,0,3.553,1.599,3.553,3.553V48.074z" fill="#FFFFFF" /></g><g><path d="M82.752,77.084c0,1.954-1.599,3.553-3.553,3.553H66.977c-1.954,0-3.553-1.599-3.553-3.553v-9.379    c0-1.954,1.599-3.553,3.553-3.553h12.222c1.954,0,3.553,1.599,3.553,3.553V77.084z" fill="#FFFFFF" /></g></g></svg>'//require('../img/icon-filetypes_dmn.svg');
 const cmmnicon = require('../img/icon-filetypes_cmmn.svg');
 
+console.log(bpmnicon)
 function bootstrapFileShare() {
 	//called once on page load
 	if (!OCA?.Sharing?.PublicApp) {
@@ -83,12 +84,13 @@ async function createDiagram(folder, ext) {
 //NB: Nextcloud changed the file API in version 28, so the previous filemenu actions are no longer compatible
 if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 	//Thanks to : https://github.com/githubkoma/multiboards/blob/main/js/filesintegration/src/index.js
+	
 	const Mimes = {
 		bpmn: {
 			mime: 'application/x-bpmn',
 			type: 'text',
 			css: 'icon-filetype-bpmn',
-			icon: bpmnicon,//'../img/icon-filetypes_bpmn.svg',
+			icon: '<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" enable-background="new 0 0 306.185 120.296" viewBox="24 26 68 68" y="0px" x="0px" version="1.1"><g><circle r="1e5" fill="#F08705"/><line y2="72.394" x2="41.061" y1="43.384" x1="58.069" stroke-miterlimit="10" stroke-width="3.5528" stroke="#FFFFFF" fill="none" /><line y2="72.394" x2="75.076" y1="43.384" x1="58.068" stroke-miterlimit="10" stroke-width="3.5008" stroke="#FFFFFF" fill="none" /><g><path d="M52.773,77.084c0,1.954-1.599,3.553-3.553,3.553H36.999c-1.954,0-3.553-1.599-3.553-3.553v-9.379    c0-1.954,1.599-3.553,3.553-3.553h12.222c1.954,0,3.553,1.599,3.553,3.553V77.084z" fill="#FFFFFF" /></g><g id="g3419"><path d="M67.762,48.074c0,1.954-1.599,3.553-3.553,3.553H51.988c-1.954,0-3.553-1.599-3.553-3.553v-9.379    c0-1.954,1.599-3.553,3.553-3.553H64.21c1.954,0,3.553,1.599,3.553,3.553V48.074z" fill="#FFFFFF" /></g><g><path d="M82.752,77.084c0,1.954-1.599,3.553-3.553,3.553H66.977c-1.954,0-3.553-1.599-3.553-3.553v-9.379    c0-1.954,1.599-3.553,3.553-3.553h12.222c1.954,0,3.553,1.599,3.553,3.553V77.084z" fill="#FFFFFF" /></g></g></svg>',
 			newStr: 'New BPMN File',
 		},
 		dmn: {
@@ -102,7 +104,7 @@ if (parseInt(OC.config.version.substring(0, 2)) >= 28) {
 			mime: 'application/x-cmmn',
 			type: 'text',
 			css: 'icon-filetype-cmmn',
-			icon: cmmnicon, //OC.imagePath('files_bpm', 'icon-filetypes_bpmn.svg'),
+			icon: OC.imagePath('files_bpm', 'icon-filetypes_bpmn.svg'),
 			newStr: 'New CMMN File',
 		},
 	};
